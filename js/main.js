@@ -1,6 +1,17 @@
-function tocarSomPom(){
-    document.querySelector('#som_tecla_pom').play();
+const lTeclas = document.querySelectorAll('.tecla');
+
+function tocarSom(pIDDoAudio){
+    lAudio = document.querySelector(pIDDoAudio);
+    lAudio.play();    
 }
 
-const lTeclas = document.querySelectorAll('.tecla')
-lTeclas[0].onclick = tocarSomPom
+lIndiceDaTecla = 0
+while (lIndiceDaTecla < lTeclas.length) {
+    const lTecla = lTeclas[lIndiceDaTecla];
+    const lClasseDaTecla = lTecla.classList[1];
+    const lIDDoAudio = '#som_'+lClasseDaTecla;
+    lTecla.onclick = function () {
+        tocarSom(lIDDoAudio);
+    }
+    lIndiceDaTecla++;
+}
