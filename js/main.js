@@ -5,13 +5,10 @@ function tocarSom(pIDDoAudio){
     lAudio.play();    
 }
 
-lIndiceDaTecla = 0
-while (lIndiceDaTecla < lTeclas.length) {
-    const lTecla = lTeclas[lIndiceDaTecla];
+lTeclas.forEach(function (lTecla) {
     const lClasseDaTecla = lTecla.classList[1];
-    const lIDDoAudio = '#som_'+lClasseDaTecla;
+    const lIDDoAudio = `#som_${lClasseDaTecla}`;
     lTecla.onclick = function () {
         tocarSom(lIDDoAudio);
     }
-    lIndiceDaTecla++;
-}
+});
