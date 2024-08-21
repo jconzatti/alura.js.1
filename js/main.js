@@ -1,10 +1,12 @@
 const lTeclas = document.querySelectorAll('.tecla');
 
-function tocarSom(pIDDoAudio){
-    lAudio = document.querySelector(pIDDoAudio);
-    lAudio.pause();
-    lAudio.currentTime = 0;
-    lAudio.play();    
+function tocarSom(pSeletorDoElementoAudio){
+    lElementoAudio = document.querySelector(pSeletorDoElementoAudio);
+    if (lElementoAudio != null && lElementoAudio.localName === 'audio'){
+        lElementoAudio.pause();
+        lElementoAudio.currentTime = 0;
+        lElementoAudio.play(); 
+    }   
 }
 
 function carregarTeclasDoAluraMidi(){
@@ -29,7 +31,7 @@ function carregarTecladoNumericoParaTocarAluraMidi(){
         for (let i = 0; i < lTeclas.length; i++) {
             const lValorDaTeclaNumerica = i+1
             if (evento.code === `Numpad${lValorDaTeclaNumerica}`) {
-                const lTecla = lTeclas[obterIndiceDaTeclaDeSomPeloValorDaTeclaNumerica(lValorDaTeclaNumerica)];
+                const lTecla = lTeclas[converterValorDaTeclaNumericaEmIndiceDaTeclaDeSomPelo(lValorDaTeclaNumerica)];
                 const lIDDoAudio = `#som_${lTecla.classList[1]}`;
                 tocarSom(lIDDoAudio);
             }
@@ -37,7 +39,7 @@ function carregarTecladoNumericoParaTocarAluraMidi(){
     } 
 }
 
-function obterIndiceDaTeclaDeSomPeloValorDaTeclaNumerica(pValorDaTeclaNumerica){
+function converterValorDaTeclaNumericaEmIndiceDaTeclaDeSomPelo(pValorDaTeclaNumerica){
     if (pValorDaTeclaNumerica < 4) {
         return pValorDaTeclaNumerica+5
     } else if (pValorDaTeclaNumerica < 7) {
